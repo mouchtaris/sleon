@@ -1,15 +1,7 @@
-package sleon
-
 import
-  scala.util.{
-    Try ⇒ sTry,
-    Success ⇒ sSuccess,
-    Failure ⇒ sFailure
-  },
-  scala.concurrent.{
-    Future ⇒ sFuture,
-    ExecutionContext ⇒ sExecutionContext,
-    Promise ⇒ sPromise
+  _root_.scala.{
+    util ⇒ scala_util,
+    concurrent ⇒ scala_concurrent
   },
   _root_.akka.{
     stream ⇒ akka_stream,
@@ -17,6 +9,20 @@ import
     actor ⇒ akka_actor,
     NotUsed ⇒ akNotUsed,
     Done ⇒ akDone
+  }
+import
+  scala_util.{
+    Try ⇒ sTry,
+    Success ⇒ sSuccess,
+    Failure ⇒ sFailure,
+  },
+  scala_util.control.{
+   Exception ⇒ sException
+  },
+  scala_concurrent.{
+    Future ⇒ sFuture,
+    ExecutionContext ⇒ sExecutionContext,
+    Promise ⇒ sPromise
   },
   akka_stream.{
     Materializer ⇒ akMaterializer,
@@ -33,16 +39,19 @@ import
     Route ⇒ akRoute
   },
   akka_actor.{
-    ActorSystem ⇒ akActorSystem
+    ActorSystem ⇒ akActorSystem,
+    Terminated ⇒ akTerminated
   }
 
-package object akka {
+package object sleon {
   type Try[a] = sTry[a]
   val Try = sTry
   type Success[a] = sSuccess[a]
   val Success = sSuccess
   type Failure[a] = sFailure[a]
   val Failure = sFailure
+
+  val Exception = sException
 
   type Future[a] = sFuture[a]
   val Future = sFuture
@@ -65,6 +74,8 @@ package object akka {
 
   type ActorSystem = akActorSystem
   val ActorSystem = akActorSystem
+  type Terminated = akTerminated
+  val Terminated = akTerminated
 
   type Materializer = akMaterializer
   type ActorMaterializer = akActorMaterializer
@@ -77,3 +88,4 @@ package object akka {
   val Route = akRoute
 
 }
+
